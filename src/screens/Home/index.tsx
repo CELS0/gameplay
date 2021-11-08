@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { ButtonAdd } from '../../components/ButtonAdd';
 import { CategorySelect } from '../../components/CategorySelect';
@@ -6,6 +6,11 @@ import { Profile } from '../../components/Profile';
 import { styles } from './styles';
 
 export function Home() {
+    const [category, setCategory] = useState('');
+
+    function handlerCategorySelect(categoryId: string){
+        categoryId === category ? setCategory('') : setCategory(categoryId)
+    }
 
     return (
         <View style={styles.container} >
@@ -15,7 +20,10 @@ export function Home() {
             </View>
 
             <View>
-                <CategorySelect />
+                <CategorySelect 
+                    categorySelected={category}
+                    setCategory={handlerCategorySelect}
+                />
             </View>
         </View>
     )
