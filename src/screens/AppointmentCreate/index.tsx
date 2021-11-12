@@ -1,18 +1,17 @@
 import React from 'react';
-import { Fontisto } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { Text, ImageBackground, View, FlatList } from 'react-native';
 import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
 import { styles } from './styles';
-import { BorderlessButton } from 'react-native-gesture-handler';
-import { theme } from '../../global/styles/theme';
-import BannerImg from '../../assets/banner.png';
-import { ListHeader } from '../../components/ListHeader';
-import { Members } from '../../components/Members';
-import { ListDivider } from '../../components/ListDivider';
-import { Buttonicon } from '../../components/Buttonicon';
 
-export function AppointmentDetails() {
+import { RectButton } from 'react-native-gesture-handler'
+import { CategorySelect } from '../../components/CategorySelect';
+import { useState } from 'react';
+import { theme } from '../../global/styles/theme';
+
+export function AppointmentCreate() {
+    const [category, setCategory] = useState('');
     const members = [
         {
             id: '1',
@@ -38,46 +37,33 @@ export function AppointmentDetails() {
     return (
         <Background>
             <Header
-                title="Detalhes"
-                action={
-                    <BorderlessButton>
-                        <Fontisto
-                            name="share"
-                            size={24}
-                            color={theme.colors.primary}
-                        />
-                    </BorderlessButton>
-                }
+                title="Agendar partida"
             />
 
-            <ImageBackground
-                source={BannerImg}
-                style={styles.banner}
-            >
-                <View style={styles.bannerContent}>
-                    <Text style={styles.title}>Lendários</Text>
-                    <Text style={styles.subtitle}>
-                        Hoje que vamos chegar ao challenger sem perder uma partida da md10
-                    </Text>
-                </View>
-            </ImageBackground>
-            <ListHeader
-                title="Jogadores"
-                subtitle={`Total ${members.length}`}
+            <Text style={styles.label}>Categoria</Text>
+
+            <CategorySelect
+                hasCheckBox
+                setCategory={setCategory}
+                categorySelected={category}
             />
-            <FlatList
-                data={members}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => (
-                    <Members data={item} />
-                )}
-                ItemSeparatorComponent={() => <ListDivider />}
-                style={styles.members}
-            />
-            <View style={styles.footer}>
-                <Buttonicon
-                    title="Entrar na partida"
-                />
+
+            <View style={styles.form}>
+                <RectButton>
+                    <View style={styles.select}>
+                        <View style={styles.image} />
+                        <View style={styles.selectBody}>
+                            <Text style={styles.label}>
+                            Selecionar um servidor
+                            </Text>
+                        </View>
+                        <Feather
+                        name="chevron-right"
+                        color={theme.colors.heading}
+                        size={18}
+                        />
+                    </View>
+                </RectButton>
             </View>
         </Background>
     )

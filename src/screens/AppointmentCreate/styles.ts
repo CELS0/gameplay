@@ -1,38 +1,40 @@
 import { StyleSheet } from 'react-native';
 import { theme } from '../../global/styles/theme';
-import {getBottomSpace} from 'react-native-iphone-x-helper';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    banner: {
-        width: '100%',
-        height: 234,
-    },
-    bannerContent:{
-        flex: 1,
-        justifyContent: 'flex-end',
-        paddingHorizontal: 24,
-        marginBottom: 30,
-    },
-    title:{
-        fontSize: 28,
+    label: {
+        color: theme.colors.heading,
         fontFamily: theme.fonts.title700,
-        color: theme.colors.heading
+        alignItems: 'center',
     },
-    subtitle:{
-        fontSize: 13,
-        fontFamily: theme.fonts.text400,
-        color: theme.colors.heading
+    form: {
+        marginHorizontal: 24,
+        marginTop: 32,
     },
-    members:{
-        marginLeft: 24,
-        marginTop: 24,
+    select: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 58,
+        borderColor: theme.colors.secondary50,
+        borderWidth: 1,
+        borderRadius: 8,
+        alignItems: 'center',
+        paddingRight: 25,
+        overflow: 'hidden',
     },
-    footer: {
-        paddingVertical: 20,
-        paddingHorizontal: 24,
-        marginBottom: getBottomSpace(),
+    image: {
+        width: 64,
+        height: 58,
+        backgroundColor: theme.colors.secondary50,
+        borderRadius: 8,
+        borderWidth: 1,
     },
+    selectBody: {
+        flex: 1,
+        alignItems: 'center',
+    }
 })
