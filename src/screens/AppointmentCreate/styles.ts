@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
         color: theme.colors.heading,
         fontFamily: theme.fonts.title700,
         alignItems: 'center',
+        fontSize: 16,
     },
     form: {
         marginHorizontal: 24,
@@ -36,5 +37,34 @@ export const styles = StyleSheet.create({
     selectBody: {
         flex: 1,
         alignItems: 'center',
+    },
+    field: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 30,
+    },
+    column: {
+        flexDirection: 'row',
+
+    },
+    divider: {
+        marginRight: 4,
+        fontSize: 20,
+        fontFamily: theme.fonts.text400,
+        color: theme.colors.highlight,
+        marginTop: 12,
+    },
+    caracteresLimit:{
+        color: theme.colors.highlight,
+        fontFamily: theme.fonts.text400,
+        alignItems: 'center',
+        fontSize: 13,
+        marginTop: 8,
+        marginBottom:8
+    },
+    footer:{
+        marginVertical: 20,
+        marginBottom: 56,
     }
 })
