@@ -13,6 +13,7 @@ import { GuildIcon } from '../../components/GuildIcon';
 import { Smallinput } from '../../components/Smallinput';
 import { TextArea } from '../../components/TextArea';
 import { Button } from '../../components/Button';
+import { useNavigation } from '@react-navigation/native';
 
 export function AppointmentCreate() {
     const [category, setCategory] = useState('');
@@ -36,6 +37,10 @@ export function AppointmentCreate() {
             status: 'online'
         }
     ]
+    const navigation = useNavigation();
+    function handleGuilds() {
+        navigation.navigate('Guilds');
+    }
 
 
     return (
@@ -57,11 +62,14 @@ export function AppointmentCreate() {
                 />
 
                 <View style={styles.form}>
-                    <RectButton>
+                    <RectButton
+                    onPress={handleGuilds}
+                    >
                         <View style={styles.select}>
                             <GuildIcon />
                             {/* <View style={styles.image} /> */}
-                            <View style={styles.selectBody}>
+                            <View style={styles.selectBody}
+                            >
                                 <Text style={styles.label}>
                                     Selecionar um servidor
                                 </Text>
