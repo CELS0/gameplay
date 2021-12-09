@@ -13,12 +13,19 @@ const guilds = [
     {
         id: '1',
         name: 'Lendarios',
-        icon: null,
+        icon: 'image.png',
+        owner: true,
+    },
+    {
+        id: '2',
+        name: 'Mercenário',
+        icon: 'image.png',
         owner: true,
     }
 ]
     return (
         <View style={styles.container}>
+            
             <FlatList
             data={guilds}
             keyExtractor={item => item.id}

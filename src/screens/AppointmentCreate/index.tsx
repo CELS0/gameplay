@@ -12,7 +12,6 @@ import { GuildIcon } from '../../components/GuildIcon';
 import { Smallinput } from '../../components/Smallinput';
 import { TextArea } from '../../components/TextArea';
 import { Button } from '../../components/Button';
-import { useNavigation } from '@react-navigation/native';
 import { ModalView } from '../../components/ModalView';
 import { Guilds } from '../Guilds';
 import { GuildProps } from '../../components/Guild';
@@ -54,12 +53,16 @@ export function AppointmentCreate() {
                     onPress={handlerOpenGuilds}
                     >
                         <View style={styles.select}>
-                            <GuildIcon />
-                            {/* <View style={styles.image} /> */}
+                           { 
+                          guild.icon ? <GuildIcon/> : 
+                          
+                          <View style={styles.image} />
+                           }
+
                             <View style={styles.selectBody}
                             >
                                 <Text style={styles.label}>
-                                    Selecionar um servidor
+                                    {guild.name ? guild.name :'Selecionar um servidor'}
                                 </Text>
                             </View>
                             <Feather
