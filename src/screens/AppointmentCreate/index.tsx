@@ -1,7 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
 import { Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
 import { styles } from './styles';
 
@@ -14,34 +13,23 @@ import { Smallinput } from '../../components/Smallinput';
 import { TextArea } from '../../components/TextArea';
 import { Button } from '../../components/Button';
 import { useNavigation } from '@react-navigation/native';
+import { ModalView } from '../../components/ModalView';
+import { Guilds } from '../Guilds';
+import { GuildProps } from '../../components/Guild';
 
 export function AppointmentCreate() {
     const [category, setCategory] = useState('');
-    const members = [
-        {
-            id: '1',
-            username: 'CELS0',
-            avatar_url: 'https://github.com/CELS0.png',
-            status: 'online'
-        },
-        {
-            id: '2',
-            username: 'ViniciusMazon',
-            avatar_url: 'https://github.com/ViniciusMazon.png',
-            status: 'offline'
-        },
-        {
-            id: '3',
-            username: 'breno44',
-            avatar_url: 'https://github.com/breno44.png',
-            status: 'online'
-        }
-    ]
-    const navigation = useNavigation();
-    function handleGuilds() {
-        navigation.navigate('Guilds');
+    const [openGuildsModa, setOpenGuildsModa] = useState(false);
+    const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
+
+    function handlerOpenGuilds(){
+        setOpenGuildsModa(true);
     }
 
+    function handlerGuildsSelect(guildSelect: GuildProps){
+        setGuild(guildSelect);
+        setOpenGuildsModa(true);
+    }
 
     return (
         <KeyboardAvoidingView
@@ -63,7 +51,7 @@ export function AppointmentCreate() {
 
                 <View style={styles.form}>
                     <RectButton
-                    onPress={handleGuilds}
+                    onPress={handlerOpenGuilds}
                     >
                         <View style={styles.select}>
                             <GuildIcon />
@@ -126,6 +114,9 @@ export function AppointmentCreate() {
                     </View>
                 </View>
             </ScrollView>
+            <ModalView visible={openGuildsModa}>
+                <Guilds/>
+            </ModalView>
         </KeyboardAvoidingView>
     )
 }
