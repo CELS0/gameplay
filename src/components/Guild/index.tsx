@@ -8,11 +8,12 @@ import {
 import { styles } from './styles';
 import { Feather } from '@expo/vector-icons';
 import { theme } from '../../global/styles/theme';
+import { GuildIcon } from '../GuildIcon';
 
 export type GuildProps = {
     id: string;
     name: string;
-    icon: string | null;
+    icon: string ;
     owner: boolean;
 }
 
@@ -27,6 +28,7 @@ export function Guild({ data, ...rest }: Props) {
             activeOpacity={0.7}
             {...rest}
         >
+             <GuildIcon />
             <View style={styles.content}>
                 <View>
                     <Text style={styles.title}>
