@@ -12,7 +12,11 @@ export const styles = StyleSheet.create({
         fontFamily: theme.fonts.text400,
         fontSize: 12,
         marginRight: 4,
-        textAlign: "center",
         marginTop:2,
+        borderWidth: 1,
+        borderColor: theme.colors.secondary50,
+        paddingHorizontal: 16,
+        paddingTop: 16,
+        textAlignVertical: 'top'
     }
 })
