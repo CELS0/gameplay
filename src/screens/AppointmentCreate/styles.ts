@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     select: {
         flexDirection: 'row',
         width: '100%',
-        height: 58,
+        height: 54,
         borderColor: theme.colors.secondary50,
         borderWidth: 1,
         borderRadius: 8,
