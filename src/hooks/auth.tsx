@@ -1,4 +1,13 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
+import * as AuthSession from 'expo-auth-session';
+import {
+    REDIRECT_URI,
+    SCOPE,
+    RESPONSE_TYPE,
+    CLIENT_ID,
+    CDN_IMAGE,
+} from '../configs'
+import { api } from '../services/api';
 
 type User = {
     id: string;
@@ -11,6 +20,7 @@ type User = {
 
 type AuthContextData = {
     user: User;
+    signIn: () => Promise<void>;
 }
 
 type AuthProviderProps = {
@@ -21,15 +31,32 @@ export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<User>({} as User);
+    const [loading, setLoading] = useState(false);
 
-    < AuthContext.Provider value={{
-        user
+    async function signIn() {
+        const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
+        try {
+            setLoading(true)
+            const response = AuthSession.startAsync({ authUrl });
+            console.log(response);
+
+        } catch(err){
+            console.log(err);
+            throw new Error('Não foi possível autenticar')
+        }
     }
-    }>
-        {children}
-    </AuthContext.Provider >
 
+    return (
+        < AuthContext.Provider value={{
+            user,
+            signIn,
+        }
+        }>
+            {children}
+        </AuthContext.Provider >
+    )
 }
+
 function useAuth() {
     const context = useContext(AuthContext)
 
