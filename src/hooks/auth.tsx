@@ -34,13 +34,14 @@ function AuthProvider({ children }: AuthProviderProps) {
     const [loading, setLoading] = useState(false);
 
     async function signIn() {
-        const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
         try {
             setLoading(true)
-            const response = AuthSession.startAsync({ authUrl });
-            console.log(response);
+            const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
 
-        } catch(err){
+            const reponse = await AuthSession.startAsync({ authUrl });
+            console.log(reponse);
+
+        } catch (err) {
             console.log(err);
             throw new Error('Não foi possível autenticar')
         }
