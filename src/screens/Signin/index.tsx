@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -9,9 +9,13 @@ import IllustrationImg from '../../assets/illustration.png'
 import { Buttonicon } from "../../components/Buttonicon";
 import { useNavigation } from "@react-navigation/native";
 import { Background } from "../../components/Background";
+import { AuthContext } from "../../hooks/auth";
 
 export function Signin() {
   const navigation = useNavigation();
+
+  const context = useContext(AuthContext);
+  console.log(context)
 
   function handleSignIn() {
     navigation.navigate('Home');
