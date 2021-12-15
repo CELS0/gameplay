@@ -8,7 +8,7 @@ import { Guilds } from '../screens/Guilds';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export function AuthRoutes() {
+export function AppRoutes() {
   return (
     <Navigator
       screenOptions={{
