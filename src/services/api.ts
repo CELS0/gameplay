@@ -1,10 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
-const api = axios.create(
-    {
-        baseURL: 'https://discord.com/api',
-    }
-);
+const api = axios.create({
+  baseURL: "https://discord.com/api",
+});
 
-
-export { api }
+export { api };

@@ -4,15 +4,17 @@ import {
   Text,
   Image,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { styles } from "./styles";
 import IllustrationImg from '../../assets/illustration.png'
 import { Buttonicon } from "../../components/Buttonicon";
 import { Background } from "../../components/Background";
 import { useAuth } from "../../hooks/auth";
+import { theme } from "../../global/styles/theme";
 
 export function Signin() {
-  const { user, signIn } = useAuth();
+  const { loading, signIn } = useAuth();
 
   async function handleSignIn() {
     try {
@@ -39,10 +41,13 @@ export function Signin() {
           <Text style={styles.subtitle}>
             Crie grupos para jogar seus games{`\n`}
           </Text>
-          <Buttonicon
+          {
+            loading ? <ActivityIndicator color={theme.colors.primary}/> :
+            <Buttonicon
             title="Entrar com Discord"
             onPress={handleSignIn}
           />
+          }
         </View>
       </View>
     </Background>
