@@ -7,6 +7,9 @@ import {
     CLIENT_ID,
     CDN_IMAGE,
 } from '../configs'
+
+// const {REDIRECT_URI, SCOPE, RESPONSE_TYPE, CLIENT_ID, CDN_IMAGE} = process.env;
+
 import { api } from '../services/api';
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
@@ -45,7 +48,6 @@ function AuthProvider({ children }: AuthProviderProps) {
         try {
             setLoading(true)
             const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
-
             const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthorizationResponse;
 
             if (type === 'success' && !params.error) {
