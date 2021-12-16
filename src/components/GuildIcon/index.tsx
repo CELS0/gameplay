@@ -13,7 +13,7 @@ export function GuildIcon({ guildId, iconId }: Props) {
     const uri = `${CDN_IMAGE}/icons/${guildId}/${iconId}.png`;
 
     return (
-        <View>
+        <View style={styles.container}>
             {
                 iconId ?
                 <Image
