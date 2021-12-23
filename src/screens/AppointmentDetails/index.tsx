@@ -37,9 +37,6 @@ export function AppointmentDetails() {
     async function fetchGuildWidget() {
         try {
             const response = await api.get(`/guilds/${guildSelected.guild.id}/widget.json`)
-            if (response.data.instant_invite == null) {
-                response.data.instant_invite = 'https://discord.gg/jAMr7p5p';
-            }
 
             setWidget(response.data);
         } catch {
