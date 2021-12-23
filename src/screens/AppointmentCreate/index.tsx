@@ -55,7 +55,8 @@ export function AppointmentCreate() {
             id: uuid.v4(),
             guild,
             category,
-            date: `${day}/${months} as ${hours}:${minutes}`
+            date: `${day}/${months} as ${hours}:${minutes}`,
+            description: description
         }
 
         const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
