@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Fontisto } from '@expo/vector-icons';
-import { Text, ImageBackground, View, FlatList, Alert, Share } from 'react-native';
+import { Text, ImageBackground, View, FlatList, Alert, Share, Platform } from 'react-native';
 import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
 import { styles } from './styles';
@@ -15,6 +15,7 @@ import { useRoute } from '@react-navigation/native';
 import { AppointmentProps } from '../../components/Appointment';
 import { api } from '../../services/api';
 import { Load } from '../../components/Load';
+import * as Linking from 'expo-linking';
 
 type Params = {
     guildSelected: AppointmentProps
@@ -36,6 +37,10 @@ export function AppointmentDetails() {
     async function fetchGuildWidget() {
         try {
             const response = await api.get(`/guilds/${guildSelected.guild.id}/widget.json`)
+            if (response.data.instant_invite == null) {
+                response.data.instant_invite = 'https://discord.gg/jAMr7p5p';
+            }
+
             setWidget(response.data);
         } catch {
             Alert.alert('Verifique as configurações do servidor, Será que o Widget está habilitado?')
@@ -43,6 +48,22 @@ export function AppointmentDetails() {
             setLoading(false)
         }
     }
+
+    function handleShareInvitation() {
+        const message = Platform.OS === 'ios'
+            ? `Junte-se a ${guildSelected.guild.name}`
+            : widget.instant_invite;
+
+        Share.share({
+            message,
+            url: widget.instant_invite
+        });
+    }
+
+    function handlerOpenGuild() {
+        Linking.openURL(widget.instant_invite)
+    }
+
     useEffect(() => {
         fetchGuildWidget();
     }, [])
@@ -52,7 +73,8 @@ export function AppointmentDetails() {
             <Header
                 title="Detalhes"
                 action={
-                    <BorderlessButton>
+                    guildSelected.guild.owner &&
+                    <BorderlessButton onPress={handleShareInvitation}>
                         <Fontisto
                             name="share"
                             size={24}
@@ -91,11 +113,14 @@ export function AppointmentDetails() {
                         />
                     </>
             }
-            <View style={styles.footer}>
-                <Buttonicon
-                    title="Entrar na partida"
-                />
-            </View>
+            {guildSelected.guild.owner &&
+                <View style={styles.footer}>
+                    <Buttonicon
+                        onPress={handlerOpenGuild}
+                        title="Entrar na partida"
+                    />
+                </View>
+            }
 
         </Background>
     )
