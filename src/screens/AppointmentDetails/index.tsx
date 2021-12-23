@@ -11,8 +11,17 @@ import { ListHeader } from '../../components/ListHeader';
 import { Members } from '../../components/Members';
 import { ListDivider } from '../../components/ListDivider';
 import { Buttonicon } from '../../components/Buttonicon';
+import { useRoute } from '@react-navigation/native';
+import { AppointmentProps } from '../../components/Appointment';
+
+type Params = {
+    guildSelected: AppointmentProps
+}
 
 export function AppointmentDetails() {
+
+    const route = useRoute();
+    const { guildSelected } = route.params as Params;
     const members = [
         {
             id: '1',
@@ -71,7 +80,7 @@ export function AppointmentDetails() {
                 renderItem={({ item }) => (
                     <Members data={item} />
                 )}
-                ItemSeparatorComponent={() => <ListDivider isCentered/>}
+                ItemSeparatorComponent={() => <ListDivider isCentered />}
                 style={styles.members}
             />
             <View style={styles.footer}>
