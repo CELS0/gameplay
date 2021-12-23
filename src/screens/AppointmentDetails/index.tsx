@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Fontisto } from '@expo/vector-icons';
-import { Text, ImageBackground, View, FlatList, Alert } from 'react-native';
+import { Text, ImageBackground, View, FlatList, Alert, Share } from 'react-native';
 import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
 import { styles } from './styles';
